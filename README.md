@@ -1,5 +1,7 @@
 # Boolean State Throttle
 
+[![Version](http://img.shields.io/npm/v/boolean-state-throttle.svg)](https://www.npmjs.org/package/boolean-state-throttle)
+
 You may want to display a top bar header floating fixed on the screen. However on mobile space is limited and there can
 be a need to hide the header when scrolling down and bringing it back when scrolling up. You might have already seen
 solutions like [Headroom.js](https://github.com/WickyNilliams/headroom.js) or
