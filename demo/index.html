@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Boolean State Throttle Demo</title>
+        <style>
+html {
+    background: #EEE;
+    font-family: sans-serif;
+}
+
+body {
+    border-top: 5em solid #222;
+    margin: 0;
+}
+
+header {
+    background: #111;
+    background: rgba(0, 0, 0, 0.95);
+    color: #EEE;
+    left: 0;
+    padding: 5px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+
+    will-change: transform;
+}
+
+header.hidden {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+#header-is-hidden {
+    background: red;
+    bottom: 0;
+    color: white;
+    display: none;
+    padding: 5px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+}
+
+#header-is-hidden.hidden {
+    display: block;
+}
+
+main {
+    background: #FFF;
+    border-left: 9px double red;
+    margin: 0 auto;
+    padding: 5px;
+    padding-bottom: 100em;
+    padding-bottom: 300vh;
+    max-width: 50em;
+}
+
+footer {
+    background: #CCC;
+    padding: 5px;
+    text-align: center;
+}
+        </style>
+        <script>/* such hack */window.module = window.exports = {}</script>
+        <script src="../index.js"></script>
+        <script>/* very wow */window.module = window.exports = void 0</script>
+    </head>
+    <body>
+        <header>
+            <h2>I am the header</h2>
+        </header>
+        <main>
+            <h1>Content</h1>
+            <p>I am the content</p>
+            <aside id="header-is-hidden">The header is hidden!</aside>
+        </main>
+        <footer>
+            <p>I am the footer</p>
+        </footer>
+        <script>
+(function() {
+    var headerElement = document.querySelector('header'),
+        notifyElement = document.getElementById('header-is-hidden')
+
+    // this is our boolean state, owned and controlled by this component
+    var isHidden = false
+
+    function getScrollY() {
+        return (window.pageYOffset !== undefined)
+            ? window.pageYOffset
+            : (document.documentElement || document.body.parentNode || document.body).scrollTop
+    }
+
+    // this function is only triggered when the boolean changes
+    // you could optimize render by using requestAnimationFrame; or simply use setState in React
+    function updateHeaderState(newState) {
+        isHidden = newState
+        notifyElement.className = headerElement.className = isHidden ? 'hidden' : ''
+    }
+
+    // convenience for you!
+    var headerStateTrigger = new BooleanStateThrottle(updateHeaderState)
+
+    function updateScrollValue() {
+        var y = getScrollY()
+        // one of the reasons to have the logic separate is that you can handle exceptions better!
+        if (isHidden && y < 50) {
+            // header should always be shown when at the top
+            updateHeaderState(false)
+        } else {
+            // bombard the boolean state throttle
+            headerStateTrigger(isHidden, y)
+        }
+    }
+
+    window.addEventListener('scroll', updateScrollValue, false)
+})()
+        </script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "boolean-state-throttle",
+  "version": "0.1.0",
+  "description": "Logic utility for use cases such as hiding header when scrolling down",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/merri/boolean-state-throttle.git"
+  },
+  "author": "Vesa Piittinen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/merri/boolean-state-throttle/issues"
+  },
+  "homepage": "https://github.com/Merri/boolean-state-throttle",
+  "keywords": [
+    "browser",
+    "headroom",
+    "mobile",
+    "utility"
+  ]
+}
