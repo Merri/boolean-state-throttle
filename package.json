@@ -1,6 +1,6 @@
 {
   "name": "boolean-state-throttle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Logic utility for use cases such as hiding header when scrolling down",
   "main": "index.js",
   "repository": {

@@ -102,7 +102,7 @@ var Component = React.createClass({
             this.updateHeaderState(false)
         } else {
             // bombard the boolean state throttle
-            this.headerStateTrigger(isHidden, y)
+            this.headerStateTrigger(this.state.isHeaderHidden, y)
         }
     }
 /* ... */
